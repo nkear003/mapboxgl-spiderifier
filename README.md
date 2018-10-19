@@ -1,3 +1,7 @@
+# Forked Changees
+
+- Allow users to override all options *commit e8e8c9e*
+
 # mapboxgl-spiderifier
 
 Spiderify markers on mapbox-gl using marker overlays. Note it does not create the spiderfication in the canvas but on a overlay on top of the canvas. This uses mapboxgl.Marker to create markers and spider legs.
