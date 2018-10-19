@@ -120,7 +120,7 @@ var spiderifier = new MapboxglSpiderifier(map, {
   })
 ```
 
-## Doc
+## API
 
 #### Options
 ```js
