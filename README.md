@@ -14,6 +14,64 @@ Spiral/Circle positioning logic taken from and credits goes to https://github.co
 ## Note:
 Mapboxgl-js has exposed getClusterLeaves/getClusterChildren (from supercluster) in version [v0.47.0](https://github.com/mapbox/mapbox-gl-js/releases/tag/v0.47.0). Thereby, now we can get the features within a cluster from mapboxgl and spiderfy them using this library.
 
+## API
+
+#### Options
+```js
+new MapboxglSpiderifier(map, options)
+```
+
+  Constructs a mapboxgl spiderifier.
+  - `map` *(mapbox gl map mandatory)*.
+  - `options` *(object optional)*
+    - `options.animate` **(boolean default: false)**
+    - `options.animationSpeed` **(number default: 0)** number in milliseconds (animation speed)
+    - `options.circleSpiralSwitchover` **(number default: 9)** number of markers till which the spider will
+      be circular and beyond this threshold, it will spider in spiral.
+    - `options.circleFootSeparation` **(number default: 25)**
+    - `options.spiralFootSeparation` **(number default: 28)**
+    - `options.spiralLengthStart` **(number default: 15)**
+    - `options.spiralLengthFactor` **(number default: 4)**
+    - `options.customPin` **(boolean default: false)**
+    - `options.initializeLeg` **(function)** function to provide a custom marker/popup for markers
+      - argument1 spiderLeg
+    - `options.onClick` **(function)**
+      - argument1 clickEvent
+      - argument2 spiderLeg
+
+**spiderLeg** Passed in options.initializeLeg/options.onClick(callbacks) and in
+spideifier.each (iterator) function.
+```
+  {
+    feature: <object>,
+    elements: {
+      container: <DomElement>,
+      line: <DomElement>,
+      pin: <DomElement>,
+    },
+    mapboxMarker: <mapboxgl.Marker instance>,
+    params:{
+      x: <number horizontal offset of pin from the center of spider>,
+      y: <number vertical offset of pin from the center of spider>,
+      angle: <number angle of line from the center of spider>,
+      legLength: <number leg line length>,
+      index: <number index of spider leg>
+    }
+  }
+```
+
+#### Functions:
+  - ```each(function(spiderLeg) {...} )``` Iterates over the currently spiderfied legs.
+    -  ```function(spiderLeg)``` Function gets called once for every spider leg.
+  - ```spiderfy(latLng, features)``` Spiderfies and displays given markers on the specified lat lng.
+    - ```latLng```  new mapboxgl.LngLat(-122.420679, 37.772537); OR [-122.420679, 37.772537];
+    - ```features``` array of plain objects.
+  - ```unspiderfy()``` Unspiderfies markers, if any spiderfied already.
+
+  - ```MapboxglSpiderifier.popupOffsetForSpiderLeg(spiderLeg)``` returns an offset object that can be
+  passed to mapboxgl's popup so that the popup will be positioned next to the pin rather than the center
+  of the spider.
+
 ## Usage:
 
 #### Simple Spiderfication of features
@@ -119,64 +177,6 @@ var spiderifier = new MapboxglSpiderifier(map, {
     }
   })
 ```
-
-## API
-
-#### Options
-```js
-new MapboxglSpiderifier(map, options)
-```
-
-  Constructs a mapboxgl spiderifier.
-  - `map` *(mapbox gl map mandatory)*.
-  - `options` *(object optional)*
-    - `options.animate` **(boolean default: false)**
-    - `options.animationSpeed` **(number default: 0)** number in milliseconds (animation speed)
-    - `options.circleSpiralSwitchover` **(number default: 9)** number of markers till which the spider will
-      be circular and beyond this threshold, it will spider in spiral.
-    - `options.circleFootSeparation` **(number default: 25)**
-    - `options.spiralFootSeparation` **(number default: 28)**
-    - `options.spiralLengthStart` **(number default: 15)**
-    - `options.spiralLengthFactor` **(number default: 4)**
-    - `options.customPin` **(boolean default: false)**
-    - `options.initializeLeg` **(function)** function to provide a custom marker/popup for markers
-      - argument1 spiderLeg
-    - `options.onClick` **(function)**
-      - argument1 clickEvent
-      - argument2 spiderLeg
-
-**spiderLeg** Passed in options.initializeLeg/options.onClick(callbacks) and in
-spideifier.each (iterator) function.
-```
-  {
-    feature: <object>,
-    elements: {
-      container: <DomElement>,
-      line: <DomElement>,
-      pin: <DomElement>,
-    },
-    mapboxMarker: <mapboxgl.Marker instance>,
-    params:{
-      x: <number horizontal offset of pin from the center of spider>,
-      y: <number vertical offset of pin from the center of spider>,
-      angle: <number angle of line from the center of spider>,
-      legLength: <number leg line length>,
-      index: <number index of spider leg>
-    }
-  }
-```
-
-#### Functions:
-  - ```each(function(spiderLeg) {...} )``` Iterates over the currently spiderfied legs.
-    -  ```function(spiderLeg)``` Function gets called once for every spider leg.
-  - ```spiderfy(latLng, features)``` Spiderfies and displays given markers on the specified lat lng.
-    - ```latLng```  new mapboxgl.LngLat(-122.420679, 37.772537); OR [-122.420679, 37.772537];
-    - ```features``` array of plain objects.
-  - ```unspiderfy()``` Unspiderfies markers, if any spiderfied already.
-
-  - ```MapboxglSpiderifier.popupOffsetForSpiderLeg(spiderLeg)``` returns an offset object that can be
-  passed to mapboxgl's popup so that the popup will be positioned next to the pin rather than the center
-  of the spider.
 
 ## ChangeLog:
 
