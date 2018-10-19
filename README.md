@@ -1,6 +1,6 @@
 # Forked Changees
 
-- Allow users to override all options *commit e8e8c9e*
+- Allow users to override all options (*commit e8e8c9e*)
 
 # mapboxgl-spiderifier
 
@@ -131,7 +131,7 @@ new MapboxglSpiderifier(map, options)
   - `map` *(mapbox gl map mandatory)*.
   - `options` *(object optional)*
     - `options.animate` **(boolean default: false)**
-    - `options.animationSpeed` **(number default: 200)** number in milliseconds (animation speed)
+    - `options.animationSpeed` **(number default: 0)** number in milliseconds (animation speed)
     - `options.circleSpiralSwitchover` **(number default: 9)** number of markers till which the spider will
       be circular and beyond this threshold, it will spider in spiral.
     - `options.circleFootSeparation` **(number default: 25)**
