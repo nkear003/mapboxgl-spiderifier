@@ -134,13 +134,16 @@ new MapboxglSpiderifier(map, options)
     - `options.animationSpeed` **(number default: 200)** number in milliseconds (animation speed)
     - `options.circleSpiralSwitchover` **(number default: 9)** number of markers till which the spider will
       be circular and beyond this threshold, it will spider in spiral.
+    - `options.circleFootSeparation` **(number default: 25)**
+    - `options.spiralFootSeparation` **(number default: 28)**
+    - `options.spiralLengthStart` **(number default: 15)**
+    - `options.spiralLengthFactor` **(number default: 4)**
     - `options.customPin` **(boolean default: false)**
     - `options.initializeLeg` **(function)** function to provide a custom marker/popup for markers
       - argument1 spiderLeg
     - `options.onClick` **(function)**
       - argument1 clickEvent
       - argument2 spiderLeg
-
 
 **spiderLeg** Passed in options.initializeLeg/options.onClick(callbacks) and in
 spideifier.each (iterator) function.
